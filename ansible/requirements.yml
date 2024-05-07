@@ -2,55 +2,55 @@
 
 # see https://docs.ansible.com/ansible/latest/user_guide/collections_using.html
 collections:
-  -
-    # see https://galaxy.ansible.com/ansible/windows
-    name: "ansible.windows"
-    version: "2.0.0"
+  # see https://galaxy.ansible.com/ansible/windows
+  - name: ansible.windows
+    version: 2.3.0
 
 # see: https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html
 roles:
-  -
-    # Go tooling
-    # see: https://github.com/gantsign/ansible-role-golang/
-    name: "gantsign.golang"
-    version: "3.1.6"  # see: https://github.com/gantsign/ansible-role-golang/releases
+  # Go tooling
+  # see: https://github.com/gantsign/ansible-role-golang/
+  - name: gantsign.golang
+    version: 3.3.2
 
-  -
-    # CIS-based role for Amazon Linux 2
-    # see: https://github.com/ansible-lockdown/AMAZON2-CIS
-    name: "ansible-lockdown.amazon2_cis"
-    src: "git@github.com:ansible-lockdown/AMAZON2-CIS.git"
-    scm: "git"
-    version: "1.1.0"  # see: https://github.com/ansible-lockdown/AMAZON2-CIS/releases
+  # CIS-based role for Amazon Linux 2
+  # see: https://github.com/ansible-lockdown/AMAZON2-CIS
+  - name: ansible-lockdown.amazon2_cis
+    src: git@github.com:ansible-lockdown/AMAZON2-CIS.git
+    scm: git
+    version: 1.2.1
 
-  -
-    # CIS-based role for RHEL 8
-    # see: https://github.com/ansible-lockdown/RHEL8-CIS
-    name: "ansible-lockdown.rhel8_cis"
-    src: "git@github.com:ansible-lockdown/RHEL8-CIS.git"
-    scm: "git"
-    version: "2.5"  # see: https://github.com/ansible-lockdown/RHEL8-CIS/releases
+  # CIS-based role for RHEL 8
+  # see: https://github.com/ansible-lockdown/RHEL8-CIS
+  - name: ansible-lockdown.rhel8_cis
+    src: git@github.com:ansible-lockdown/RHEL8-CIS.git
+    scm: git
+    version: 2.6.0
 
-  -
-    # CIS-based role for Ubuntu 22.04
-    # see: https://github.com/ansible-lockdown/UBUNTU22-CIS
-    name: "ansible-lockdown.ubuntu22_cis"
-    src: "git@github.com:ansible-lockdown/UBUNTU22-CIS.git"
-    scm: "git"
-    version: "V1.0.0"  # see: https://github.com/ansible-lockdown/UBUNTU22-CIS/releases
+  # CIS-based role for RHEL 9
+  # see: https://github.com/ansible-lockdown/RHEL9-CIS
+  - name: ansible-lockdown.rhel9_cis
+    src: git@github.com:ansible-lockdown/RHEL9-CIS.git
+    scm: git
+    version: 1.2.0
 
-  -
-    # CIS-based role for Windows Server 2019
-    # see: https://github.com/ansible-lockdown/Windows-2019-CIS
-    name: "ansible-lockdown.windows_2019_cis"
-    src: "git@github.com:ansible-lockdown/Windows-2019-CIS.git"
-    scm: "git"
-    version: "1.2.0"  # see: https://github.com/ansible-lockdown/Windows-2019-CIS/releases
+  # CIS-based role for Ubuntu 22.04
+  # see: https://github.com/ansible-lockdown/UBUNTU22-CIS
+  - name: ansible-lockdown.ubuntu22_cis
+    src: git@github.com:ansible-lockdown/UBUNTU22-CIS.git
+    scm: git
+    version: 1.4.0
 
-  -
-    # CIS-based role for Windows Server 2022
-    # see: https://github.com/ansible-lockdown/Windows-2022-CIS
-    name: "ansible-lockdown.windows_2022_cis"
-    src: "git@github.com:ansible-lockdown/Windows-2022-CIS.git"
-    scm: "git"
-    version: "main"  # see: https://github.com/ansible-lockdown/Windows-2022-CIS/releases
+  # CIS-based role for Windows Server 2019
+  # see: https://github.com/ansible-lockdown/Windows-2019-CIS
+  - name: ansible-lockdown.windows_2019_cis
+    src: git@github.com:ansible-lockdown/Windows-2019-CIS.git
+    scm: git
+    version: 2.0.0
+
+  # CIS-based role for Windows Server 2022
+  # see: https://github.com/ansible-lockdown/Windows-2022-CIS
+  - name: ansible-lockdown.windows_2022_cis
+    src: git@github.com:ansible-lockdown/Windows-2022-CIS.git
+    scm: git
+    version: 2.0.0
