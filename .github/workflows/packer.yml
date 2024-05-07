@@ -1,0 +1,57 @@
+# This is a Terraform-managed file; manual changes will be overwritten.
+# see https://github.com/workloads/github-organization/blob/main/templates/workflows/superlinter.tftpl.yml
+
+---
+
+name: "Code Quality: Packer"
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+
+# see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+permissions: read-all
+
+jobs:
+  workflow:
+    # only run if workflows are enabled
+    if: ${{ vars.ENABLE_WORKFLOWS == 'true' }}
+
+    # see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#concurrency
+    concurrency:
+      group: "${{ github.workflow }}-${{ github.ref }}"
+      cancel-in-progress: true
+
+    name: Packer
+
+    # see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+    permissions:
+      statuses: read
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      # see https://github.com/actions/checkout/releases/tag/v4.1.1
+      - name: Checkout Repository
+        uses: "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11"  # ref: `tags/v4.1.1`
+        with:
+          # full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+
+#      # see https://github.com/hashicorp/setup-packer/releases/tag/v5.7.2
+#      - name: Lint Packer templates
+#        uses: "hashicorp/setup-packer@v3.1.0"
+
+  workflow-inactive:
+    # only run if workflows are disabled
+    if: ${{ vars.ENABLE_WORKFLOWS != 'true' }}
+
+    name: Workflow Status
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+
+    steps:
+      - name: Display Workflow Status
+        # shellcheck disable=SC2006
+        run: echo "::notice title='Workflow is not currently active'::'Check if `ENABLE_WORKFLOWS` is set to `true`.'"
