@@ -2,8 +2,9 @@
 - name: Provision Packer Image for Target `{{ packer_builder_type }}`
   hosts: default
   become: true
+  gather_facts: true
   vars:
-    ansible_required_version: 2.15.1
+    ansible_required_version: 2.16.0
 
   # path is relative from `main.yml`
   # see https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html#understanding-variable-precedence
@@ -55,6 +56,7 @@
       when:
         - developer_mode is true
 
+    # TODO: enable for other OSes
     - role: ansible-lockdown.ubuntu22_cis
       when:
         - ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'jammy' and enable_cis_hardening is true

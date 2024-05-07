@@ -22,7 +22,7 @@
 
 ## Requirements
 
-- HashiCorp Packer `1.9.0` or [newer](https://developer.hashicorp.com/packer/downloads)
+- HashiCorp Packer `1.10.0` or [newer](https://developer.hashicorp.com/packer/downloads)
 - Ansible `2.15.0` or [newer](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 - a check-out of [@workloads/tooling](https://github.com/workloads/tooling)
 
