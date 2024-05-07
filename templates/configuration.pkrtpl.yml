@@ -3,6 +3,6 @@
 # This is a Packer-generated file; manual changes will be overwritten.
 # see https://github.com/workloads/packer-templates/blob/main/packer/templates/configuration.pkrtpl.yml
 
-# Generated on ${timestamp}
+# Generated on ${timestamp} using Packer v${packer_version}
 
 ${configuration}
