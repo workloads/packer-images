@@ -1,38 +1,38 @@
 ---
 
-## see https://docs.ansible.com/ansible/2.10/collections/ansible/builtin/user_module.html
-#- name: Add Users for HashiCorp Packages
-#  user:
-#    comment: "HashiCorp {{ item.name | capitalize }}"
-#    group: "{{ item.name }}"
-#    name: "{{ item.name }}"
-#    #shell: /sbin/nologin.txt
-#    system: true
-#  with_items:
-#    - "{{ hashicorp.packages }}"
-#  when:
-#    - hashicorp.enabled_products[item.name]
-#    - hashicorp.toggles.create_users
-#
-## see https://docs.ansible.com/ansible/2.10/collections/ansible/builtin/user_module.html
-#- name: Add Users to `hashicorp` Group
-#  user:
-#    append: true
-#    groups:
-#      - hashicorp
-#    name: "{{ item.name }}"
-#    system: true
-#  with_items:
-#    - "{{ hashicorp.packages }}"
-#  when:
-#    - hashicorp.enabled_products[item.name] is defined
-#    - hashicorp.enabled_products[item.name]
-#    - hashicorp.toggles.create_users
-#    - hashicorp.toggles.create_groups
+# see https://docs.ansible.com/ansible/2.10/collections/ansible/builtin/user_module.html
+- name: Add Users for HashiCorp Packages
+  ansible.builtin.user:
+    comment: "HashiCorp {{ item.name | capitalize }}"
+    group: "{{ item.name }}"
+    name: "{{ item.name }}"
+    # shell: /sbin/nologin.txt
+    system: true
+  with_items:
+    - "{{ hashicorp.packages }}"
+  when:
+    - hashicorp.enabled_products[item.name]
+    - hashicorp.toggles.create_users
+
+# see https://docs.ansible.com/ansible/2.10/collections/ansible/builtin/user_module.html
+- name: Add Users to `hashicorp` Group
+  ansible.builtin.user:
+    append: true
+    groups:
+      - hashicorp
+    name: "{{ item.name }}"
+    system: true
+  with_items:
+    - "{{ hashicorp.packages }}"
+  when:
+    - hashicorp.enabled_products[item.name] is defined
+    - hashicorp.enabled_products[item.name]
+    - hashicorp.toggles.create_users
+    - hashicorp.toggles.create_groups
 
 # see https://docs.ansible.com/ansible/2.10/collections/ansible/builtin/user_module.html
 - name: Add `nomad` User to `docker` Group
-  user:
+  ansible.builtin.user:
     append: true
     groups:
       - docker
@@ -46,7 +46,7 @@
 
 # see https://docs.ansible.com/ansible/2.10/collections/ansible/builtin/template_module.html
 - name: Copy Unit Files for HashiCorp Packages
-  template:
+  ansible.builtin.template:
     dest: "/lib/systemd/system/{{ item.name }}.service"
     src: "units/{{ item.name }}.service"
     mode: "0644"
@@ -58,7 +58,7 @@
 
 # see https://docs.ansible.com/ansible/2.10/modules/systemd_module.html
 - name: Start Services for HashiCorp Packages
-  systemd:
+  ansible.builtin.systemd:
     enabled: true
     state: started
     name: "{{ item.name }}"
