@@ -1,0 +1,71 @@
+---
+
+## see https://docs.ansible.com/ansible/2.10/collections/ansible/builtin/user_module.html
+#- name: Add Users for HashiCorp Packages
+#  user:
+#    comment: "HashiCorp {{ item.name | capitalize }}"
+#    group: "{{ item.name }}"
+#    name: "{{ item.name }}"
+#    #shell: /sbin/nologin.txt
+#    system: true
+#  with_items:
+#    - "{{ hashicorp.packages }}"
+#  when:
+#    - hashicorp.enabled_products[item.name]
+#    - hashicorp.toggles.create_users
+#
+## see https://docs.ansible.com/ansible/2.10/collections/ansible/builtin/user_module.html
+#- name: Add Users to `hashicorp` Group
+#  user:
+#    append: true
+#    groups:
+#      - hashicorp
+#    name: "{{ item.name }}"
+#    system: true
+#  with_items:
+#    - "{{ hashicorp.packages }}"
+#  when:
+#    - hashicorp.enabled_products[item.name] is defined
+#    - hashicorp.enabled_products[item.name]
+#    - hashicorp.toggles.create_users
+#    - hashicorp.toggles.create_groups
+
+# see https://docs.ansible.com/ansible/2.10/collections/ansible/builtin/user_module.html
+- name: Add `nomad` User to `docker` Group
+  user:
+    append: true
+    groups:
+      - docker
+    name: nomad
+    system: true
+  when:
+    - hashicorp.enabled_products.nomad is defined
+    - hashicorp.enabled_products.nomad is true
+    - hashicorp.toggles.create_users
+    - hashicorp.toggles.add_nomad_user_to_docker
+
+# see https://docs.ansible.com/ansible/2.10/collections/ansible/builtin/template_module.html
+- name: Copy Unit Files for HashiCorp Packages
+  template:
+    dest: "/lib/systemd/system/{{ item.name }}.service"
+    src: "units/{{ item.name }}.service"
+    mode: "0644"
+  with_items:
+    - "{{ hashicorp.packages }}"
+  when:
+    - hashicorp.enabled_products[item.name]
+    - hashicorp.toggles.copy_unit_files
+
+# see https://docs.ansible.com/ansible/2.10/modules/systemd_module.html
+- name: Start Services for HashiCorp Packages
+  systemd:
+    enabled: true
+    state: started
+    name: "{{ item.name }}"
+  with_items:
+    - "{{ hashicorp.packages }}"
+  when:
+    - hashicorp.enabled_products[item.name] is defined
+    - hashicorp.enabled_products[item.name] is true
+    - hashicorp.toggles.enable_services
+    - hashicorp.toggles.start_services

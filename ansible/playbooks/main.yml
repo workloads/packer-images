@@ -1,4 +1,5 @@
 ---
+
 - name: Provision Packer Image for Target `{{ packer_builder_type }}`
   hosts: default
   become: true
@@ -82,6 +83,13 @@
         file: users.yml
       when:
         - users is defined
+
+    # see https://docs.ansible.com/ansible/latest/collections/ansible/builtin/include_tasks_module.html
+    - name: Manage HashiCorp Operations
+      ansible.builtin.include_tasks:
+        file: hashicorp.yml
+      when:
+        - hashicorp is defined and hashicorp.enabled
 
     # see https://docs.ansible.com/ansible/latest/collections/ansible/builtin/include_tasks_module.html
     - name: Manage Developer Mode Tasks
