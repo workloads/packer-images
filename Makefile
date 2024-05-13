@@ -163,10 +163,10 @@ ansible_lint: # lint Ansible Playbooks [Usage: `make ansible_lint`]
 
 	# lint Ansible files and output SARIF results
 	$(BINARY_ANSIBLE_LINT) \
-		--config "$(ANSIBLELINT_CONFIG)" \
-		--format "$(ANSIBLELINT_FORMAT)" \
+		--config "$(CONFIG_ANSIBLELINT)" \
+		--format "$(FORMAT_ANSIBLELINT)" \
     --sarif-file="$(ANSIBLELINT_SARIF_FILE)" \
-		--write="all" \
+		--fix="all" \
 		"$(ANSIBLE_PLAYBOOK)"
 
 .SILENT .PHONY: ansible_local

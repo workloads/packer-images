@@ -13,17 +13,17 @@
 
 ## Requirements
 
-- HashiCorp Packer `1.9.0` or [newer](https://developer.hashicorp.com/packer/downloads)
+- HashiCorp Packer `1.10.0` or [newer](https://developer.hashicorp.com/packer/downloads)
 
 ## Overview
 
-|                 | description                                   |
-|-----------------|-----------------------------------------------|
-| image template  | n/a                                           |
-| image variables | n/a                                           |
-| build target    | `null`                                        |
-| build command   | `make build target=null builder=null os=<os>` |
-| lint command    | `make lint template=null builder=null os=<os>`  |
+|                 | description                                    |
+|-----------------|------------------------------------------------|
+| image template  | n/a                                            |
+| image variables | n/a                                            |
+| build target    | `null`                                         |
+| build command   | `make build target=null builder=null os=<os>`  |
+| lint command    | `make lint template=null builder=null os=<os>` |
 
 ## Usage
 
