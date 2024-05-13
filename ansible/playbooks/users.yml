@@ -1,4 +1,5 @@
 ---
+
 # see https://docs.ansible.com/ansible/latest/collections/ansible/builtin/debug_module.html
 - name: Debug
   ansible.builtin.debug:

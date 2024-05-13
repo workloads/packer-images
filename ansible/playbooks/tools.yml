@@ -1,4 +1,5 @@
 ---
+
 # see https://docs.ansible.com/ansible/latest/collections/ansible/builtin/debug_module.html
 - name: Debug
   ansible.builtin.debug:
@@ -28,8 +29,7 @@
   ansible.builtin.include_tasks:
     file: tools_packages.yml
   vars:
-    repo_name: "{{ item.key }}"
-    repo_config: "{{ item.value }}"
+    tool: "{{ item.key }}"
 
   loop: "{{ tools | dict2items }}"
   when:

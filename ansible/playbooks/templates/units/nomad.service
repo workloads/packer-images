@@ -1,0 +1,41 @@
+### BEGIN INIT INFO
+# Provides:          nomad
+# Required-Start:    $local_fs $remote_fs
+# Required-Stop:     $local_fs $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: distributed scheduler
+# Description:       distributed, highly available, datacenter-aware scheduler
+### END INIT INFO
+
+# TODO: make this an actual rendered-template that can be configured for `client` or `server` use
+
+[Unit]
+Description="HashiCorp Nomad"
+Documentation=https://developer.hashicorp.com/nomad/docs
+Requires=network-online.target
+After=network-online.target
+Wants=network-online.target
+After=network-online.target docker.service
+
+ConditionDirectoryNotEmpty=/etc/nomad.d/
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+User=root
+Group=bin
+ExecStart=/usr/bin/nomad agent -config=/etc/nomad.d/
+ExecReload=/bin/kill --signal HUP $MAINPID
+KillMode=process
+KillSignal=SIGINT
+LimitNOFILE=65536
+LimitMEMLOCK=infinity
+OOMScoreAdjust=-1000
+Restart=on-failure
+RestartSec=30s
+TasksMax=infinity
+Type=notify
+
+[Install]
+WantedBy=multi-user.target
