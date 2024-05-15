@@ -2,13 +2,15 @@
 
 This directory contains templates for various providers.
 
-All templates inherit [`variables_shared.pkr.hcl`](./variables_shared.pkr.hcl) and [`builders_shared.pkr.hcl`](./builders_shared.pkr.hcl) through a symbolic link
+All templates _MUST_ inherit the following shared files through symbolic links:
 
-## Making shared variables accessible to a template
+* [`builders_shared.pkr.hcl`](./builders_shared.pkr.hcl), for common `builder` configuration
+* [`plugins_shared.pkr.hcl`](./plugins_shared.pkr.hcl), for common `plugin` configuration
+* [`variables_shared.pkr.hcl`](./variables_shared.pkr.hcl), for common `variable` configuration
 
-The global [`variables_shared.pkr.hcl`](./variables_shared.pkr.hcl) and [`builders_shared.pkr.hcl`](./builders_shared.pkr.hcl) file contains variables that are shared across all templates.
+## Making shared configuration accessible to a template
 
-To make these variables accessible to a template, the `_link_vars` target inside the [Makefile](../Makefile) can be used:
+To make the shared configuration accessible to a template, the `_link_vars` target inside the [Makefile](../Makefile) can be used:
 
 ```shell
 make _link_vars target=<target>
