@@ -23,7 +23,7 @@
     - os is defined and os.enabled
 
 # see https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html
-- name: Copy `nologin` Message File
+- name: Render `nologin` Message File
   ansible.builtin.template:
     dest: /etc/nologin
     src: nologin.txt
@@ -31,12 +31,11 @@
   when:
     - os.toggles.copy_nologin_file
 
-# see https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
-- name: Copy Image Information File
-  ansible.builtin.copy:
+# see https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html
+- name: Render Image Information File
+  ansible.builtin.template:
     backup: false
-    dest: "{{ ansible_env.HOME }}"
-    force: true
+    dest: "{{ ansible_env.HOME }}/README_IMAGE.md"
     mode: "0644"
     src: "{{ InfoFile }}"
   when:
