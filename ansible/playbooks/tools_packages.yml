@@ -11,6 +11,7 @@
 # see https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
 - name: Install Apt Packages
   ansible.builtin.apt:
+    allow_downgrade: "{{ tool.value.packages.allow_downgrades | default(false) }}"
     install_recommends: true
     name: "{{ apt_installable.name }}={{ apt_installable.version }}"
     state: present

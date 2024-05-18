@@ -50,17 +50,56 @@
         - enable_facts_statement
 
   roles:
+    - role: ansible-lockdown.amazon2_cis
+      when:
+        - enable_cis_hardening is true
+        - ansible_distribution == 'Amazon' and ansible_distribution_major_version == '2'
+
+    - role: ansible-lockdown.amazon2023_cis
+      when:
+        - enable_cis_hardening is true
+        - ansible_distribution == 'Amazon' and ansible_distribution_major_version == '2023'
+
+    - role: ansible-lockdown.rhel8_cis
+      when:
+        - enable_cis_hardening is true
+        - ansible_distribution == 'RedHat' and ansible_distribution_major_version == '8'
+
+    - role: ansible-lockdown.rhel9_cis
+      when:
+        - enable_cis_hardening is true
+        - ansible_distribution == 'RedHat' and ansible_distribution_major_version == '9'
+
+    - role: ansible-lockdown.ubuntu20_cis
+      when:
+        - enable_cis_hardening is true
+        - ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'focal'
+
+    - role: ansible-lockdown.ubuntu22_cis
+      when:
+        - enable_cis_hardening is true
+        - ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'jammy'
+
+    - role: ansible-lockdown.windows_2019_cis
+      when:
+          - enable_cis_hardening is true
+          - ansible_distribution == 'Windows' and ansible_distribution_major_version == '2019'
+
+    - role: ansible-lockdown.windows_2022_cis
+      when:
+        - enable_cis_hardening is true
+        - ansible_distribution == 'Windows' and ansible_distribution_major_version == '2022'
+
+    - role: datadog.datadog
+      when:
+        - enable_datadog_agent is true
+
     - role: gantsign.golang
       vars:
         golang_version: "{{ developer.go.version }}"
         golang_install_dir: "{{ developer.go.install_dir_prefix }}/{{ developer.go.version }}"
       when:
         - developer_mode is true
-
-    # TODO: enable for other OSes
-    - role: ansible-lockdown.ubuntu22_cis
-      when:
-        - ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'jammy' and enable_cis_hardening is true
 
   tasks:
     # see https://docs.ansible.com/ansible/latest/collections/ansible/builtin/include_tasks_module.html
