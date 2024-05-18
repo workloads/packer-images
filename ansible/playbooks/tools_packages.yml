@@ -14,8 +14,7 @@
     install_recommends: true
     name: "{{ item.name }}={{ item.version | default('*') }}"
     state: present
-  with_items:
-    - "{{ tool }}"
+  loop: "{{ tool | flatten(levels=1) }}"
   when:
     - tool is defined
 
@@ -24,7 +23,6 @@
   ansible.builtin.yum:
     name: "{{ item.name }}-{{ item.version | default('*') }}"
     state: present
-  with_items:
-    - "{{ tool }}"
+  loop: "{{ tool | flatten(levels=1) }}"
   when:
     - tool is defined

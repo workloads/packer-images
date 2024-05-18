@@ -19,7 +19,6 @@
     # `.asc` is the required extension for armored keys
     repo_gpg_file: "{{ item.key }}.asc"
     repo_keyring_directory: /usr/share/keyrings
-
   loop: "{{ tools | dict2items }}"
   when:
     - tools is defined
@@ -30,7 +29,6 @@
     file: tools_packages.yml
   vars:
     tool: "{{ item.key }}"
-
   loop: "{{ tools | dict2items }}"
   when:
     - tools is defined
@@ -44,7 +42,6 @@
     hashicorp_base_url: "{{ nomad_plugins.hashicorp_base_url }}"
     plugin_name: "{{ item.key }}"
     plugin_config: "{{ item.value }}"
-
   loop: "{{ nomad_plugins.plugins | dict2items }}"
   when:
     - nomad_plugins is defined

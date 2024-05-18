@@ -65,11 +65,9 @@
 - name: Install Repository-provided Packages for `{{ repo_name | upper }}`
   ansible.builtin.apt:
     install_recommends: true
-    name: "{{ installable.name }}={{ installable.version | default('*') }}"
+    name: "{{ item.name }}={{ item.version | default('*') }}"
     state: present
     update_cache: true
-  with_items: "{{ repo_config.packages.to_install }}"
-  loop_control:
-    loop_var: installable
+  loop: "{{ repo_config.packages.to_install | flatten(levels=1) }}"
   when:
     - ansible_os_family == "Debian"

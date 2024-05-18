@@ -8,8 +8,7 @@
     name: "{{ item.name }}"
     # shell: /sbin/nologin.txt
     system: true
-  with_items:
-    - "{{ hashicorp.packages }}"
+  loop: "{{ hashicorp.packages | flatten(levels=1) }}"
   when:
     - hashicorp.enabled_products[item.name]
     - hashicorp.toggles.create_users
@@ -22,8 +21,7 @@
       - hashicorp
     name: "{{ item.name }}"
     system: true
-  with_items:
-    - "{{ hashicorp.packages }}"
+  loop: "{{ hashicorp.packages | flatten(levels=1) }}"
   when:
     - hashicorp.enabled_products[item.name] is defined
     - hashicorp.enabled_products[item.name]
@@ -50,8 +48,7 @@
     dest: "/lib/systemd/system/{{ item.name }}.service"
     src: "units/{{ item.name }}.service"
     mode: "0644"
-  with_items:
-    - "{{ hashicorp.packages }}"
+  loop: "{{ hashicorp.packages | flatten(levels=1) }}"
   when:
     - hashicorp.enabled_products[item.name]
     - hashicorp.toggles.copy_unit_files
@@ -62,8 +59,7 @@
     enabled: true
     state: started
     name: "{{ item.name }}"
-  with_items:
-    - "{{ hashicorp.packages }}"
+  loop: "{{ hashicorp.packages | flatten(levels=1) }}"
   when:
     - hashicorp.enabled_products[item.name] is defined
     - hashicorp.enabled_products[item.name] is true

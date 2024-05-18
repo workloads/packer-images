@@ -14,8 +14,7 @@
     name: "{{ item }}"
     state: present
     system: true
-  with_items:
-    - "{{ user_groups.group }}"
+  loop: "{{ user_groups.group | flatten(levels=1) }}"
   when:
     - item is defined
 
@@ -25,7 +24,6 @@
     name: "{{ item }}"
     state: present
     system: true
-  with_items:
-    - "{{ user_groups.group }}"
+  loop: "{{ user_groups.group | flatten(levels=1) }}"
   when:
     - item is defined
