@@ -29,7 +29,7 @@
 Optional, and only needed for development and testing of Packs:
 
 - `terraform-docs` `0.17.0` or [newer](https://terraform-docs.io/user-guide/installation/)
-- `ansible-lint` `6.17.0` or [newer](https://ansible.readthedocs.io/projects/lint/installing/)
+- `ansible-lint` `24.5.0` or [newer](https://ansible.readthedocs.io/projects/lint/installing/)
 
 ## Usage
 

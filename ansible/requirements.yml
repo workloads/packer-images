@@ -8,17 +8,19 @@ collections:
 
 # see: https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html
 roles:
-  # Go tooling
-  # see: https://github.com/gantsign/ansible-role-golang/
-  - name: gantsign.golang
-    version: 3.3.2
-
   # CIS-based role for Amazon Linux 2
   # see: https://github.com/ansible-lockdown/AMAZON2-CIS
   - name: ansible-lockdown.amazon2_cis
     src: git@github.com:ansible-lockdown/AMAZON2-CIS.git
     scm: git
     version: 1.2.1
+
+  # CIS-based role for Amazon Linux 2023
+  # see: https://github.com/ansible-lockdown/AMAZON2023-CIS
+  - name: ansible-lockdown.amazon2023_cis
+    src: git@github.com:ansible-lockdown/AMAZON2023-CIS.git
+    scm: git
+    version: 1.1.0
 
   # CIS-based role for RHEL 8
   # see: https://github.com/ansible-lockdown/RHEL8-CIS
@@ -33,6 +35,13 @@ roles:
     src: git@github.com:ansible-lockdown/RHEL9-CIS.git
     scm: git
     version: 1.2.0
+
+  # CIS-based role for Ubuntu 20.04
+  # see: https://github.com/ansible-lockdown/UBUNTU20-CIS
+  - name: ansible-lockdown.ubuntu20_cis
+    src: git@github.com:ansible-lockdown/UBUNTU20-CIS.git
+    scm: git
+    version: 2.2.1
 
   # CIS-based role for Ubuntu 22.04
   # see: https://github.com/ansible-lockdown/UBUNTU22-CIS
@@ -54,3 +63,15 @@ roles:
     src: git@github.com:ansible-lockdown/Windows-2022-CIS.git
     scm: git
     version: 2.0.0
+
+  # Datadog Agent
+  # see https://galaxy.ansible.com/ui/standalone/roles/DataDog/datadog/
+  # and: https://github.com/DataDog/ansible-datadog
+  - name: datadog.datadog
+    version: 4.22.0
+
+  # Go tooling
+  # see: https://galaxy.ansible.com/ui/standalone/roles/gantsign/golang/
+  # and https://github.com/gantsign/ansible-role-golang/
+  - name: gantsign.golang
+    version: 3.3.2
