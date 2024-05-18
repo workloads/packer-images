@@ -1,5 +1,19 @@
 ---
 
+# see https://docs.ansible.com/ansible/latest/collections/ansible/builtin/include_tasks_module.html
+- name: Manage Nomad Plugin Operations
+  ansible.builtin.include_tasks:
+    file: tools_nomad_plugins.yml
+  vars:
+    destination: "{{ nomad_plugins.destination }}"
+    hashicorp_base_url: "{{ nomad_plugins.hashicorp_base_url }}"
+    plugin_name: "{{ item.key }}"
+    plugin_config: "{{ item.value }}"
+  loop: "{{ nomad_plugins.plugins | dict2items }}"
+  when:
+    - nomad_plugins is defined
+    - nomad_plugins.plugins is defined
+
 # see https://docs.ansible.com/ansible/2.10/collections/ansible/builtin/user_module.html
 - name: Add Users for HashiCorp Packages
   ansible.builtin.user:

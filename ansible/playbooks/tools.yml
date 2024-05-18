@@ -28,7 +28,8 @@
   ansible.builtin.include_tasks:
     file: tools_packages.yml
   vars:
-    tool: "{{ item.key }}"
+    allow_downgrade: "{{ tools_allow_downgrade | default(false) }}"
+    tool: "{{ item }}"
   loop: "{{ tools | dict2items }}"
   when:
     - tools is defined

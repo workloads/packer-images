@@ -12,17 +12,26 @@
 - name: Install Apt Packages
   ansible.builtin.apt:
     install_recommends: true
-    name: "{{ item.name }}={{ item.version | default('*') }}"
+    name: "{{ apt_installable.name }}={{ apt_installable.version }}"
     state: present
-  loop: "{{ tool | flatten(levels=1) }}"
+  loop: "{{ tool.value.packages.to_install }}"
+  loop_control:
+    loop_var: apt_installable
   when:
+    - ansible_os_family == "Debian"
     - tool is defined
+    - tool.value.packages.to_install is defined
 
 # see https://docs.ansible.com/ansible/latest/collections/ansible/builtin/yum_module.html
 - name: Install YUM Packages
   ansible.builtin.yum:
-    name: "{{ item.name }}-{{ item.version | default('*') }}"
+    allow_downgrade: "{{ tool.value.packages.allow_downgrades | default(false) }}"
+    name: "{{ yum_installable.name }}-{{ yum_installable.version | default('*') }}"
     state: present
-  loop: "{{ tool | flatten(levels=1) }}"
+  loop: "{{ tool.value.packages.to_install }}"
+  loop_control:
+    loop_var: yum_installable
   when:
+    - ansible_os_family == "Amazon" or ansible_os_family == "RedHat"
     - tool is defined
+    - tool.value.packages.to_install is defined

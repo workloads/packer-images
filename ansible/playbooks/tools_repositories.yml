@@ -64,10 +64,13 @@
 # see https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
 - name: Install Repository-provided Packages for `{{ repo_name | upper }}`
   ansible.builtin.apt:
+    allow_downgrade: "{{ repo_config.packages.allow_downgrades | default(false) }}"
     install_recommends: true
-    name: "{{ item.name }}={{ item.version | default('*') }}"
+    name: "{{ apt_installable.name }}={{ apt_installable.version | default('*') }}"
     state: present
     update_cache: true
   loop: "{{ repo_config.packages.to_install | flatten(levels=1) }}"
+  loop_control:
+    loop_var: apt_installable
   when:
     - ansible_os_family == "Debian"
