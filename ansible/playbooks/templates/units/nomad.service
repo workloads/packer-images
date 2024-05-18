@@ -1,3 +1,6 @@
+# This is a Packer-managed file; manual changes may be overwritten.
+# see https://github.com/workloads/packer-templates/blob/main/ansible/playbooks/templates/units/nomad.service.j2
+
 ### BEGIN INIT INFO
 # Provides:          nomad
 # Required-Start:    $local_fs $remote_fs
