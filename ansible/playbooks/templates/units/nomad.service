@@ -11,15 +11,15 @@
 # Description:       distributed, highly available, datacenter-aware scheduler
 ### END INIT INFO
 
-# TODO: make this an actual rendered-template that can be configured for `client` or `server` use
-
 [Unit]
-Description="HashiCorp Nomad"
+Description="HashiCorp Nomad (Type: {{ nomad_type }})"
 Documentation=https://developer.hashicorp.com/nomad/docs
 Requires=network-online.target
 After=network-online.target
 Wants=network-online.target
-After=network-online.target docker.service
+
+{# wait for Docker if Docker is present in Tools configuration #}
+After=network-online.target {% if tools.docker %}docker.service{% endif %}
 
 ConditionDirectoryNotEmpty=/etc/nomad.d/
 StartLimitIntervalSec=60

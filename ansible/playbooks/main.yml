@@ -82,8 +82,8 @@
 
     - role: ansible-lockdown.windows_2019_cis
       when:
-          - enable_cis_hardening is true
-          - ansible_distribution == 'Windows' and ansible_distribution_major_version == '2019'
+        - enable_cis_hardening is true
+        - ansible_distribution == 'Windows' and ansible_distribution_major_version == '2019'
 
     - role: ansible-lockdown.windows_2022_cis
       when:

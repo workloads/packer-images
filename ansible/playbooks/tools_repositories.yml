@@ -69,7 +69,7 @@
     name: "{{ apt_installable.name }}={{ apt_installable.version | default('*') }}"
     state: present
     update_cache: true
-  loop: "{{ repo_config.packages.to_install | flatten(levels = 1) }}"
+  loop: "{{ repo_config.packages.to_install | flatten(levels=1) }}"
   loop_control:
     loop_var: apt_installable
   when:

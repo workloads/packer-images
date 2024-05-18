@@ -26,7 +26,7 @@
     GO111MODULE: "{{ GO111MODULE }}"
   register: go_mod_output
   changed_when: go_mod_output.rc != 0
-  loop: "{{ developer.go.modules | flatten(levels = 1) }}"
+  loop: "{{ developer.go.modules | flatten(levels=1) }}"
   when:
     - ansible_os_family == "Amazon" or ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
@@ -40,6 +40,6 @@
     GO111MODULE: "{{ GO111MODULE }}"
   register: go_install_output
   changed_when: go_install_output.rc != 0
-  loop: "{{ developer.go.modules | flatten(levels = 1) }}"
+  loop: "{{ developer.go.modules | flatten(levels=1) }}"
   when:
     - ansible_os_family == "Amazon" or ansible_os_family == "Debian" or ansible_os_family == "RedHat"
