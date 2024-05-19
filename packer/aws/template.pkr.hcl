@@ -30,6 +30,8 @@ packer {
 
 # see https://developer.hashicorp.com/packer/integrations/hashicorp/amazon/latest/components/data-source/ami
 data "amazon-ami" "image" {
+  # this filter is designed to find the most recent AMI that matches the given constraints (name, etc.)
+  # depending on the source image, this may not result in the same source AMI being selected each time
   filters = {
     name                = "${var.source_image_family}/images/${var.ami_virtualization_type}-ssd/${var.source_image_name}"
     root-device-type    = "ebs"
@@ -48,15 +50,17 @@ locals {
   }
 }
 
-# see https://developer.hashicorp.com/packer/plugins/builders/amazon/ebs
+# see https://developer.hashicorp.com/packer/integrations/hashicorp/amazon/latest/components/builder/ebs
 source "amazon-ebs" "main" {
   # the following configuration represents a curated variable selection
-  # for all options see: https://developer.hashicorp.com/packer/plugins/builders/amazon/ebs
+  # for all options see: https://developer.hashicorp.com/packer/integrations/hashicorp/amazon/latest/components/builder/ebs
 
   ami_description = var.ami_description
   ami_groups      = var.ami_groups
 
-  ami_name                    = local.image.name
+  # AMI Name should be short and memorable
+  ami_name = local.image.name
+
   ami_product_codes           = var.ami_product_codes
   ami_regions                 = var.ami_regions
   ami_users                   = var.ami_users
@@ -82,6 +86,7 @@ source "amazon-ebs" "main" {
   force_delete_snapshot = var.force_delete_snapshot
   force_deregister      = var.force_deregister
   iam_instance_profile  = var.iam_instance_profile
+  imds_support          = var.imds_support
   instance_type         = var.instance_type
   kms_key_id            = var.kms_key_id
   profile               = var.profile

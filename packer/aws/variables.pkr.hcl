@@ -139,6 +139,12 @@ variable "iam_instance_profile" {
   default     = null
 }
 
+variable "imds_support" {
+  type        = string
+  description = "Enforce version of the Instance Metadata Service on the built AMI."
+  default     = "v2.0"
+}
+
 variable "instance_type" {
   type        = string
   description = "The EC2 instance type to use while building the AMI"
