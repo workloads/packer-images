@@ -1,7 +1,7 @@
 # ignore temporary files
-./dist/*
 ./.vagrant/*
+dist/*
 
-# ignored symlinked files
-packer/**/builders_shared.pkr.hcl
-packer/**/variables_shared.pkr.hcl
+# ignored symlinked files, except their sources
+packer/**/*_shared.pkr.hcl
+!packer/*_shared.pkr.hcl
