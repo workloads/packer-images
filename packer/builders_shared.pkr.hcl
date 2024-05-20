@@ -63,7 +63,7 @@ build {
     "source.${var.template_provider}.main",
   ]
 
-  # see https://developer.hashicorp.com/packer/plugins/provisioners/ansible/ansible
+  # see https://developer.hashicorp.com/packer/integrations/hashicorp/ansible/latest/components/provisioner/ansible
   provisioner "ansible" {
     ansible_env_vars        = var.ansible_env_vars
     command                 = var.ansible_command

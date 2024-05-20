@@ -3,5 +3,6 @@
 dist/*
 
 # ignored symlinked files, except their sources
+packer/**/crash.log
 packer/**/*_shared.pkr.hcl
 !packer/*_shared.pkr.hcl

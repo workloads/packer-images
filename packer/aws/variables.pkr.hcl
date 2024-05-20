@@ -308,19 +308,6 @@ variable "subnet_id" {
   default     = ""
 }
 
-variable "tags" {
-  type        = map(string)
-  description = "Key/value pair tags applied to the AMI."
-
-  default = {}
-}
-
-variable "version_description" {
-  type        = string
-  description = "Version to use for the image."
-  default     = ""
-}
-
 variable "vpc_id" {
   type        = string
   description = "Requires subnet_id to be set. Used to create a temporary security group within the VPC. If this field is left blank, Packer will try to get the VPC ID from the subnet_id."
