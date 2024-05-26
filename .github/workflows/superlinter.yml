@@ -32,16 +32,16 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      # see https://github.com/actions/checkout/releases/tag/v4.1.1
+      # see https://github.com/actions/checkout/releases/tag/v4.1.6
       - name: Checkout Repository
-        uses: "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11"  # ref: `tags/v4.1.1`
+        uses: "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29"  # ref: `tags/v4.1.6`
         with:
           # full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
 
-      # see https://github.com/super-linter/super-linter/releases/tag/v6.2.0
+      # see https://github.com/super-linter/super-linter/releases/tag/v6.5.1
       - name: Lint Code with Super-Linter
-        uses: "super-linter/super-linter@25003d0370b45d97187597838ecb9fdadfc08aea"  # ref: `tags/v6.2.0`
+        uses: "super-linter/super-linter@5b638caee6ba65e25e07143887b669a1233847a0"  # ref: `tags/v6.5.1`
         env:
           # see https://github.com/github/super-linter#environment-variables
           CSS_FILE_NAME: ".stylelintrc.json"
