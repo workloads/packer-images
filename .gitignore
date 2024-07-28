@@ -1,5 +1,4 @@
 # ignore temporary files
-./.vagrant/*
 dist/*
 
 # ignored symlinked files, except their sources
