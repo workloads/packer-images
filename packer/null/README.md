@@ -13,7 +13,7 @@
 
 ## Requirements
 
-- HashiCorp Packer `1.10.0` or [newer](https://developer.hashicorp.com/packer/downloads)
+- HashiCorp Packer `1.11.0` or [newer](https://developer.hashicorp.com/packer/downloads)
 
 ## Overview
 

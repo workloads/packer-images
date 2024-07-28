@@ -22,13 +22,13 @@
 
 ## Requirements
 
-- HashiCorp Packer `1.10.0` or [newer](https://developer.hashicorp.com/packer/downloads)
+- HashiCorp Packer `1.11.0` or [newer](https://developer.hashicorp.com/packer/downloads)
 - Ansible `2.15.0` or [newer](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 - a check-out of [@workloads/tooling](https://github.com/workloads/tooling)
 
 Optional, and only needed for development and testing of Packs:
 
-- `terraform-docs` `0.17.0` or [newer](https://terraform-docs.io/user-guide/installation/)
+- `terraform-docs` `0.18.0` or [newer](https://terraform-docs.io/user-guide/installation/)
 - `ansible-lint` `24.5.0` or [newer](https://ansible.readthedocs.io/projects/lint/installing/)
 
 ## Usage
